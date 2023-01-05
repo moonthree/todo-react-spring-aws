@@ -8,10 +8,10 @@ export default function Navbar() {
     <>
       <Header>
         <Logo>
-          <Link to="/">Todolist</Link>
+          <Link to="/todo">Todolist</Link>
         </Logo>
         <Nav>
-          <Link to="/login">로그인</Link>
+          <Link to="/">로그인</Link>
         </Nav>
       </Header>
     </>

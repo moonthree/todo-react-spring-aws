@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Notfound from "./pages/Notfound";
 import Todo from "./pages/Todo";
-import Login from "./pages/Login";
+import Main from "./pages/Main";
 
 const router = createBrowserRouter([
   {
@@ -14,8 +14,8 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <Notfound />,
     children: [
-      { index: true, path: "/", element: <Todo /> },
-      { path: "/login", element: <Login /> },
+      { index: true, path: "/", element: <Main /> },
+      { path: "/todo", element: <Todo /> },
     ],
   },
 ]);
