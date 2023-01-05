@@ -3,6 +3,7 @@ package com.mooncoding.todolist.controller;
 import com.mooncoding.todolist.dto.ResponseDTO;
 import com.mooncoding.todolist.dto.UserDTO;
 import com.mooncoding.todolist.model.UserEntity;
+import com.mooncoding.todolist.security.TokenProvider;
 import com.mooncoding.todolist.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TokenProvider tokenProvider;
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO) {
@@ -55,9 +59,12 @@ public class UserController {
             userDTO.getUsername(),
             userDTO.getPassword());
         if (user != null) {
+            //토큰 생성
+            final String token = tokenProvider.create(user);
             final UserDTO responseUserDTO = userDTO.builder()
                 .username(user.getUsername())
                 .id(user.getId())
+                .token(token)
                 .build();
             return ResponseEntity.ok().body(responseUserDTO);
         } else {
